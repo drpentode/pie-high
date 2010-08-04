@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{pie-high}
-  s.version = "0.0.0"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jeff Sutherland"]
@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
      "VERSION",
      "lib/high_chart.rb",
      "lib/high_chart_series.rb",
+     "pie-high.gemspec",
      "spec/high_chart_series_spec.rb",
      "spec/high_chart_spec.rb",
      "spec/spec.opts",
