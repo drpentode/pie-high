@@ -1,16 +1,34 @@
-= pie-high
+= Easy as <b>Pie High</b> Charts
 
-Description goes here.
+This gem gives you an easy-as-pie Ruby interface to High Charts.
 
-== Note on Patches/Pull Requests
- 
-* Fork the project.
-* Make your feature addition or bug fix.
-* Add tests for it. This is important so I don't break it in a
-  future version unintentionally.
-* Commit, do not mess with rakefile, version, or history.
-  (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
-* Send me a pull request. Bonus points for topic branches.
+== Usage
+I really hate to say this, but at version 0.1.0, the documentation is the code comments.  More to follow as I expand
+this gem.
+
+=== In the controller
+<tt>
+     require "high_chart"
+     require "high_chart_series"
+     @data_set = DataSet.find(:all)
+     @series = HighChartSeries.multi_series("name", "data", @data_set)
+     @my_chart = HighChart.new(@series,
+                                    {:title => "The Best Chart Ever", :x_axis_labels => ["Like", "Dislike", "Indifferent"], :y_axis_title => "Comparison of Apples to Oranges"}))
+</tt>
+
+=== In the view
+
+<tt>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            chart1 = new Highcharts.Chart(
+                <%= @my_chart.to_json %>
+            );
+        });
+    </script>
+
+    <div id="high-chart-container" style="width: 100%; height: 400px"></div>
+</tt>
 
 == Copyright
 

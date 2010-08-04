@@ -1,6 +1,7 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-require 'pie-high'
+require 'high_chart'
+require 'high_chart_series'
 require 'spec'
 require 'spec/autorun'
 
