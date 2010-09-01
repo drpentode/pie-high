@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{pie-high}
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jeff Sutherland"]
-  s.date = %q{2010-08-03}
+  s.date = %q{2010-08-31}
   s.description = %q{High Charts is one of the best JavaScript charting libraries there is.  Here is a straight-forward
                       Ruby API to harness all the power High Charts has to offer.  Includes support for Ruport pivot tables.}
   s.email = %q{jefferey.sutherland@gmail.com}
@@ -24,9 +24,11 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "lib/hash_extensions.rb",
      "lib/high_chart.rb",
      "lib/high_chart_series.rb",
      "pie-high.gemspec",
+     "spec/assets/high_chart_defaults.yml",
      "spec/high_chart_series_spec.rb",
      "spec/high_chart_spec.rb",
      "spec/spec.opts",
@@ -50,13 +52,16 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_development_dependency(%q<rspec>, [">= 1.2.9"])
       s.add_development_dependency(%q<ruport>, [">= 1.6.1"])
+      s.add_development_dependency(%q<json_pure>, [">= 1.1.9"])
     else
       s.add_dependency(%q<rspec>, [">= 1.2.9"])
       s.add_dependency(%q<ruport>, [">= 1.6.1"])
+      s.add_dependency(%q<json_pure>, [">= 1.1.9"])
     end
   else
     s.add_dependency(%q<rspec>, [">= 1.2.9"])
     s.add_dependency(%q<ruport>, [">= 1.6.1"])
+    s.add_dependency(%q<json_pure>, [">= 1.1.9"])
   end
 end
 
