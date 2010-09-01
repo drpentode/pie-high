@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+require "spec_helper"
 require "high_chart"
 require "high_chart_series"
 include Ruport::Data
@@ -92,7 +92,7 @@ describe HighChartSeries do
     it "should build a multi series from a ruport table" do
       series = HighChartSeries.multi_series("event", "count", table.data.collect(& :data))
       series.size.should == 2
-      series.first[:data].first.should eql(2)
+      series.first[:data].first.to_i.should eql(2)
       series.first[:name].should eql("Event 1")
     end
 

@@ -5,7 +5,7 @@ class HighChartSeries
 
   class << self
 
-    # builds an array of series from the same data set
+    # builds an array of series to make a chart more interesting
     # series_name_attribute - string of method to call to get series name
     # attribute_of_interest - method with the numeric data to build the chart
     # chart_data - array of query results with which to build a series
@@ -23,7 +23,7 @@ class HighChartSeries
       return series
     end
 
-    # will generate a hash for an individual series
+    # will generate a hash
     # {:name => "My Wonderful Series", :data => [0, 1, 2, 3]
     # series_options => used to define individual options for series
     def single_series(series_name, attribute_of_interest, chart_series_data, series_options={})
@@ -31,10 +31,10 @@ class HighChartSeries
 
       if chart_series_data.kind_of?(Array)
         for datum in chart_series_data
-          series_data << datum.send(attribute_of_interest)
+          series_data << datum.send(attribute_of_interest).to_f
         end
       else
-        series_data << chart_series_data
+        series_data << chart_series_data.to_f
       end
 
       unless series_options == nil
@@ -62,7 +62,8 @@ class HighChartSeries
       return final_series
     end
 
-    # accommodates multi-dimensional pivot tables from Ruport
+    # accommodates multi-dimensional pivot tables
+    # based on Ruport pivot tables
     # also generates your x-axis labels
     def pivot_series(series_name_attribute, attribute_of_interest, chart_data, options={})
       series = []
@@ -102,12 +103,12 @@ class HighChartSeries
       return x_labels, series
     end
 
-    # for building multiple, non-identical series for combo line/bar charts from multiple data sets
+    # for building multiple, non-identical series for combo line, bar charts
     # series_name_attributes - attributes to get "name" keys from
     # attributes_of_interest - array of strings naming the attributes to examine
     # chart_data - the data to build the chart from, an array of arrays, if you will
     # series_options - array of hashes to be passed to single_series
-    def multi_axis_series(series_name_attributes, attributes_of_interest, chart_data_arr, series_options=[{}, {"type" => "spline"}, {"type" => "spline"}])
+    def multi_axis_series(series_name_attributes, attributes_of_interest, chart_data_arr, series_options=[{}, {"type" => "line", "yAxis"=>1}, {"type" => "line", "yAxis"=>2}])
       series = []
 
       chart_data_arr.each_with_index do |chart_data, index|

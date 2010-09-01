@@ -1,6 +1,6 @@
 class HighChart
   attr_accessor :chart, :credits, :colors, :global, :labels, :lang, :legend, :loading, :plot_options, :point, :series,
-                :subtitle, :symbols, :title, :toolbar, :tooltip, :x_axis, :y_axis, :x_axis_labels, :y_axis_title,
+                :subtitle, :symbols, :title, :toolbar, :tooltip, :x_axis, :y_axis, :x_axis_labels,
                 :chart_div, :chart_type, :width
 
   def initialize(series, options={})
@@ -16,9 +16,7 @@ class HighChart
       raise HighChartError, "Colors must be an Array"
     end
 
-    if options[:config_file]
-      read_defaults(options[:config_file])
-    end
+    read_defaults(options[:config_file])
 
     options.each do |k, v|
       if self.respond_to?(k.to_sym)
@@ -41,9 +39,16 @@ class HighChart
     return default_value
   end
 
+  # read a yaml file of defaults and write out the options
   def read_defaults(config_file)
     begin
-      defaults = YAML.load_file(config_file)
+      defaults = nil
+
+      if config_file == nil
+        defaults = YAML.load_file(RentalAddressConfig.config.high_charts_defaults_file)
+      else
+        defaults = YAML.load_file(config_file)
+      end
 
       unless defaults == false
         defaults.each do |k, v|
@@ -53,6 +58,8 @@ class HighChart
         end
       end
     rescue Exception => e
+      puts e.message
+      puts e.backtrace
       raise e
     end
   end
@@ -91,10 +98,7 @@ class HighChart
   end
 
   def y_axis
-    y_axis_hash = {}
-    y_axis_hash["title"] = @y_axis_title
-    y_axis_hash.merge!(@y_axis) if @y_axis
-    return y_axis_hash
+    return @y_axis
   end
 
   def to_json
