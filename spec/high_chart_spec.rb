@@ -1,5 +1,6 @@
 require "spec_helper"
 require "high_chart"
+require "hash_extensions"
 
 describe HighChart do
   before(:each) do
@@ -10,7 +11,7 @@ describe HighChart do
   end
 
   it "should read some defaults from a config file" do
-    chart = HighChart.new(@series, {:x_axis_labels => @x_labels, :title => "chart title", :config_file => File.dirname(__FILE__) + "/../assets/high_chart_defaults.yml"})
+    chart = HighChart.new(@series, {:x_axis_labels => @x_labels, :title => "chart title", :config_file => File.dirname(__FILE__) + "/assets/high_chart_defaults.yml"})
     chart.legend.should == {"enabled" => true, "layout" => "vertical"}
   end
 
@@ -19,12 +20,12 @@ describe HighChart do
   end
 
   it "should merge options from the hash passed in with the values in the config file" do
-    chart = HighChart.new(@series, {:x_axis_labels => @x_labels, :legend => {:enabled => false}, :config_file => File.dirname(__FILE__) + "/../assets/high_chart_defaults.yml"})
+    chart = HighChart.new(@series, {:x_axis_labels => @x_labels, :legend => {:enabled => false}, :config_file => File.dirname(__FILE__) + "/assets/high_chart_defaults.yml"})
     chart.legend.should == {"enabled" => false, "layout" => "vertical"}
   end
 
   it "should set instance variables from the options hash" do
-    chart = HighChart.new(@series, {:x_axis_labels => @x_labels, :title => "chart title", :legend => {:enabled => false}, :config_file => File.dirname(__FILE__) + "/../assets/high_chart_defaults.yml"})
+    chart = HighChart.new(@series, {:x_axis_labels => @x_labels, :title => "chart title", :legend => {:enabled => false}, :config_file => File.dirname(__FILE__) + "/assets/high_chart_defaults.yml"})
     chart.title.should == {"text" => "chart title"}
   end
 
@@ -62,12 +63,12 @@ describe HighChart do
   end
 
   it "should read colors from a config file" do
-    chart = HighChart.new(@series, {:x_axis_labels => @x_labels, :title => "chart title", :config_file => File.dirname(__FILE__) + "/../assets/high_chart_defaults.yml"})
+    chart = HighChart.new(@series, {:x_axis_labels => @x_labels, :title => "chart title", :config_file => File.dirname(__FILE__) + "/assets/high_chart_defaults.yml"})
     chart.colors.should == ['#FFFFFF', '#000000']
   end
 
   it "should merge default chart options from a config file" do
-    chart = HighChart.new(@series, {:x_axis_labels => @x_labels, :title => "chart title", :config_file => File.dirname(__FILE__) + "/../assets/high_chart_defaults.yml"})
+    chart = HighChart.new(@series, {:x_axis_labels => @x_labels, :title => "chart title", :config_file => File.dirname(__FILE__) + "/assets/high_chart_defaults.yml"})
     chart.chart.should == {"defaultSeriesType"=>"bar", "renderTo"=>"high-chart-container", "plotBackgroundColor" => "#000000"}
   end
 

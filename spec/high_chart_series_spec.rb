@@ -1,6 +1,8 @@
 require "spec_helper"
 require "high_chart"
 require "high_chart_series"
+require "ruport"
+
 include Ruport::Data
 
 class ChartData

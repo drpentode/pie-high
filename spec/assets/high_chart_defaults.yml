@@ -1,0 +1,9 @@
+---
+chart:
+  plotBackgroundColor: '#000000'
+
+legend:
+  enabled: true
+  layout: 'vertical'
+
+colors: [ '#FFFFFF', '#000000' ]

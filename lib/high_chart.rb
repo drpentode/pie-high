@@ -1,3 +1,7 @@
+require "yaml"
+require "hash_extensions"
+require "json"
+
 class HighChart
   attr_accessor :chart, :credits, :colors, :global, :labels, :lang, :legend, :loading, :plot_options, :point, :series,
                 :subtitle, :symbols, :title, :toolbar, :tooltip, :x_axis, :y_axis, :x_axis_labels,
@@ -16,7 +20,9 @@ class HighChart
       raise HighChartError, "Colors must be an Array"
     end
 
-    read_defaults(options[:config_file])
+    if options[:config_file]
+      read_defaults(options[:config_file])
+    end
 
     options.each do |k, v|
       if self.respond_to?(k.to_sym)
@@ -42,13 +48,7 @@ class HighChart
   # read a yaml file of defaults and write out the options
   def read_defaults(config_file)
     begin
-      defaults = nil
-
-      if config_file == nil
-        defaults = YAML.load_file(RentalAddressConfig.config.high_charts_defaults_file)
-      else
-        defaults = YAML.load_file(config_file)
-      end
+      defaults = YAML.load_file(config_file)
 
       unless defaults == false
         defaults.each do |k, v|
@@ -74,7 +74,7 @@ class HighChart
     end
 
     default_chart = {"renderTo" => @chart_div, "defaultSeriesType" => @chart_type}
-    default_chart.merge!({"width" => @width}) if width.present?
+    default_chart.merge!({"width" => @width}) if @width != nil
     default_chart.merge!(@chart) if @chart
 
     return default_chart
